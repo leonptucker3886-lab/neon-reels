@@ -1,5 +1,7 @@
 # NEON REELS
 
+**Play it: https://neon-reels.vercel.app**
+
 A free neon slot machine that runs in the browser. Play money only — nothing to buy, no cash-out, nothing to lose. 18+.
 
 Five reels, twenty paylines, wild bolts, moon scatters, free spins at ×2 and a progressive jackpot, wrapped in a chasing-bulb neon cabinet.
