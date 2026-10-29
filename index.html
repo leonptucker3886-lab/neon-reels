@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>NEON REELS · free neon slots</title>
+<meta name="description" content="NEON REELS — a free neon slot machine with wilds, free spins and a progressive jackpot. Play money only: nothing to buy, nothing to lose. 18+.">
+<meta name="theme-color" content="#05050a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2305050a'/><path d='M18 4 8 18h6l-2 10 12-16h-6z' fill='%2322f0ff'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<header class="topbar">
+  <a class="logo" href="./" aria-label="NEON REELS home">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 3 7 18h6l-2 11 13-16h-6z"/></svg>
+    <span>NEON<b>REELS</b></span>
+  </a>
+  <span class="tag">free play money · 18+</span>
+  <span class="tsp"></span>
+  <div class="bal">
+    <svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h5M9.5 14.5h5"/></svg>
+    <span class="amt" id="bal">25,000</span>
+    <button class="plus" id="refuel" title="Refuel +10,000" aria-label="Refuel balance">+</button>
+  </div>
+</header>
+
+<main class="game">
+  <section class="panel" id="panel">
+    <div class="spinrow">
+      <button class="btn big pri" id="spin" aria-label="Spin (space bar)">SPIN</button>
+      <button class="btn ico" id="ptbtn" aria-label="Paytable">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+      </button>
+    </div>
+
+    <div class="field">
+      <label>Bet <span class="faint">Glow coins</span></label>
+      <div class="bets">
+        <button id="bdn" aria-label="Lower bet">−</button>
+        <span class="bv" id="bval">100<small>total bet</small></span>
+        <button id="bup" aria-label="Raise bet">+</button>
+        <button class="maxbtn" id="bmax">MAX</button>
+      </div>
+    </div>
+
+    <div class="opt">
+      <span>Turbo<small>Faster reels</small></span>
+      <label class="toggle"><input type="checkbox" id="turbo" aria-label="Turbo spins"><i></i></label>
+    </div>
+
+    <div class="field">
+      <label>Autoplay <span class="faint" style="text-transform:none;letter-spacing:0;font-weight:600">stops on 20×+ win</span></label>
+      <div class="auto">
+        <div class="seg" id="aseg">
+          <button data-n="10" class="on">10</button>
+          <button data-n="25">25</button>
+          <button data-n="50">50</button>
+        </div>
+        <button class="btn" id="auto">Auto</button>
+      </div>
+    </div>
+
+    <div class="keys">
+      <span><kbd>Space</kbd> spin</span><span><kbd>↑</kbd><kbd>↓</kbd> bet</span><span><kbd>T</kbd> turbo</span>
+    </div>
+  </section>
+
+  <section class="stage" id="stage">
+    <div class="head">
+      <h1>NEON <span class="em">REELS</span></h1>
+      <div class="jp" id="jpbox">
+        <small>◈ neon jackpot ◈</small>
+        <b id="jp">250,000</b>
+      </div>
+    </div>
+
+    <div class="cabinet" id="cabinet">
+      <div class="reelwrap" id="reelwrap">
+        <div class="grid" id="grid"></div>
+        <svg class="lines" id="lines" aria-hidden="true"></svg>
+        <div class="fsbar" id="fsbar"><span>FREE SPINS</span><b id="fsleft">0</b></div>
+        <div class="flash" id="flash" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="winbox" id="winbox" aria-live="polite">
+      <small id="winmsg">Five reels · twenty lines · wild bolts · moon scatters</small>
+      <b id="winamt">0</b>
+    </div>
+    <div class="msg" id="msg">Press SPIN or hit space</div>
+  </section>
+</main>
+
+<div class="bigwin" id="bigwin" data-tier="big" aria-hidden="true">
+  <div class="rays" aria-hidden="true"></div>
+  <div class="bw">
+    <div class="t" id="bwt">BIG WIN</div>
+    <div class="a" id="bwa">0</div>
+    <div class="m" id="bwm">×10</div>
+  </div>
+</div>
+
+<div class="scrim" id="ptscrim" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Paytable">
+    <div class="mhead">
+      <h2>Paytable</h2>
+      <button class="btn sm" id="ptclose">Close</button>
+    </div>
+    <p class="mnote">Prizes are multiples of your <b>total bet</b>. Scatters pay anywhere. Wins on the 20 lines pay left to right, wild bolts substitute.</p>
+    <div class="tiers" aria-label="Win tiers">
+      <span>Big<b>8×</b></span><span>Mega<b>15×</b></span><span>Epic<b>25×</b></span>
+    </div>
+    <div class="ptable" id="ptable"></div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<footer class="foot">
+  <p><b>NEON REELS</b> is a free demo slot. Play money only — no purchase, no cash-out, nothing to lose. 18+.</p>
+  <p>Built in the neon style of <a href="https://afterglow.leonlink.net" rel="noopener">AFTERGLOW</a>.</p>
+</footer>
+
+<script src="game.js"></script>
+</body>
+</html>
